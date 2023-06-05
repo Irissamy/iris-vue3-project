@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkiris_vue3_project"]=self["webpackChunkiris_vue3_project"]||[]).push([[631],{7631:function(r,e,u){u.r(e),u.d(e,{default:function(){return o}});var n=u(3396);function t(r,e){return(0,n.wg)(),(0,n.iD)("div",null,"Products")}var c=u(89);const i={},s=(0,c.Z)(i,[["render",t]]);var o=s}}]);
+//# sourceMappingURL=631.b2cfb6d9.js.map
