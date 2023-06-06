@@ -51,8 +51,13 @@ export default {
         .then((res) => {
           const { token, expired } = res.data
           document.cookie = `hexToken=${token};${expired}`
-          console.log(res)
-          this.$router.push('/dashboardView/products')
+          this.user.username = ''
+          this.user.password = ''
+          if (res.data.success) {
+            this.$router.push('/dashboardView/products')
+          } else {
+            alert(res.data.message)
+          }
         })
     }
   }

@@ -28,15 +28,42 @@
 <script>
 
 export default {
+  data () {
+    return {
+      isLogin: false
+    }
+  },
   methods: {
     logout () {
       const api = `${process.env.VUE_APP_API}logout`
       this.$http.post(api, this.user)
         .then((res) => {
           console.log(res)
+          this.isLogin = false
           this.$router.push('/loginView')
         })
     }
+    // checkLogin () {
+    //   function getCookie (cookieName) {
+    //     const name = cookieName + '='
+    //     const ca = document.cookie.split(';')
+    //     for (let i = 0; i < ca.length; i++) {
+    //       let c = ca[i]
+    //       while (c.charAt(0) === ' ') c = c.substring(1)
+    //       if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+    //     }
+    //     return ''
+    //   }
+    //   if (document.cookie.hexToken) {
+    //     console.log(getCookie('hexToken'))
+    //     this.isLogin = true
+    //   } else {
+    //     this.isLogin = false
+    //   }
+    // }
+  },
+  created () {
+    // this.checkLogin()
   }
 }
 </script>
