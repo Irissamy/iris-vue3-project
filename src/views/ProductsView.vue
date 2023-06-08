@@ -30,7 +30,7 @@
             <td>
                 <div class="btn-group">
                 <button class="btn btn-outline-primary btn-sm" @click="openModal(false,item)">編輯</button>
-                <button class="btn btn-outline-danger btn-sm">刪除</button>
+                <button class="btn btn-outline-danger btn-sm" @click="deleteModal(item)">刪除</button>
                 </div>
             </td>
             </tr>
@@ -38,16 +38,19 @@
     </table>
     <PaginationBar></PaginationBar>
     <ProductModal ref="productModal" :product="addProductList" @add-product="updateProduct"></ProductModal>
+    <DeleteModal ref="deleteModal" :delete-item="addProductList" @delete-product="deleteProduct"></DeleteModal>
 </template>
 
 <script>
 import PaginationBar from '@/components/PaginationBar.vue'
 import ProductModal from '@/components/ProductModal.vue'
+import DeleteModal from '@/components/DeleteModal.vue'
 
 export default {
   components: {
     PaginationBar,
-    ProductModal
+    ProductModal,
+    DeleteModal
   },
   data () {
     return {
@@ -75,6 +78,10 @@ export default {
       this.isNew = isNew
       this.$refs.productModal.showModal()
     },
+    deleteModal (item) {
+      this.addProductList = { ...item }
+      this.$refs.deleteModal.showModal()
+    },
     updateProduct (item) {
       console.log(item)
       this.addProductList = item
@@ -91,6 +98,14 @@ export default {
         .then((res) => {
           this.getProductList()
           this.$refs.productModal.hideModal()
+        })
+    },
+    deleteProduct (item) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.addProductList.id}`
+      this.$http.delete(api)
+        .then((res) => {
+          this.getProductList()
+          this.$refs.deleteModal.hideModal()
         })
     }
   },

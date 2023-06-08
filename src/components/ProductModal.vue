@@ -25,7 +25,7 @@
                   </label>
                   <input type="file" id="customFile" class="form-control" ref="fileInput" @change="updateFile">
                 </div>
-                <img class="img-fluid" alt="">
+                <img class="img-fluid" alt="" :src="addProductList.imageUrl">
                 <!-- 延伸技巧，多圖 -->
                 <div class="mt-5">
                   <div class="mb-3 input-group" >
@@ -113,7 +113,7 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal'
+import modalMixins from '@/mixins/modalMixins'
 
 export default {
   props: {
@@ -128,6 +128,7 @@ export default {
       addProductList: {}
     }
   },
+  mixins: [modalMixins],
   // 因為單向數據流，不能修該外層的資料，但是每次開啟modal就要更新一次，所以這邊要監聽變化然後更新這裡的data
   watch: {
     product () {
@@ -135,12 +136,6 @@ export default {
     }
   },
   methods: {
-    showModal () {
-      this.modal.show()
-    },
-    hideModal () {
-      this.modal.hide()
-    },
     updateFile () {
       const uploadedFile = this.$refs.fileInput.files[0]
       // console.dir(uploadedFile)
@@ -154,9 +149,6 @@ export default {
           }
         })
     }
-  },
-  mounted () {
-    this.modal = new Modal(this.$refs.modal)
   }
 }
 </script>
