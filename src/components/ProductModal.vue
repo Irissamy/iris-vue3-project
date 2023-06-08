@@ -148,6 +148,7 @@ export default {
             this.addProductList.imageUrl = res.data.imageUrl
           }
         })
+      this.$refs.fileInput.value = ''
     }
   }
 }
