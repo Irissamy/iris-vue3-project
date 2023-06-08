@@ -1,8 +1,6 @@
 <template>
   <NavBar></NavBar>
-  <div class="container-fluid">
-    <router-view/>
-  </div>
+  <router-view/>
 </template>
 <script>
 import NavBar from '@/components/NavBar.vue'

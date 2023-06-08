@@ -1,4 +1,5 @@
 <template>
+    <LoadingOverlay :active="isLoading"></LoadingOverlay>
     <div class="text-end">
         <button class="btn btn-primary" type="button" @click="openModal(true)">新增項目</button>
         <!-- <button class="btn btn-primary" type="button" @click="$refs.productModal.showModal()">新增項目</button> -->
@@ -57,16 +58,20 @@ export default {
       productList: [],
       pagination: {},
       addProductList: {},
-      isNew: false
+      isNew: false,
+      isLoading: false
     }
   },
+  inject: ['emitter'],
   methods: {
     getProductList () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products`
+      this.isLoading = true
       this.$http.get(api)
         .then((res) => {
           this.productList = res.data.products
           this.pagination = res.data.pagination
+          this.isLoading = false
         })
     },
     openModal (isNew, item) {
@@ -96,7 +101,20 @@ export default {
       }
       this.$http[httpMethods](api, { data: this.addProductList })
         .then((res) => {
-          this.getProductList()
+        //   this.getProductList()
+          if (res.data.success) {
+            this.getProductList()
+            this.emitter.emit('push-message', {
+              style: 'success',
+              title: '更新成功'
+            })
+          } else {
+            this.emitter.emit('push-message', {
+              style: 'danger',
+              title: '更新失敗',
+              content: res.data.message.join('、')
+            })
+          }
           this.$refs.productModal.hideModal()
         })
     },
