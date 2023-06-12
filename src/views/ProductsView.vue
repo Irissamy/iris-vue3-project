@@ -20,10 +20,10 @@
             <td>{{ item.category }}</td>
             <td>{{ item.title }}</td>
             <td class="text-right">
-                {{ item.origin_price }}
+                {{ $filters.currency(item.origin_price) }}
             </td>
             <td class="text-right">
-                {{ item.price }}
+                {{ $filters.currency(item.price) }}
             </td>
             <td>
                 <span class="text-success" :class="{ 'text-muted': item.is_enabled === undefined | 0  }">{{ item.is_enabled === 1 ? '啟用' : '未啟用 '}}</span>
