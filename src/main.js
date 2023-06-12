@@ -1,9 +1,8 @@
 import { createApp } from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-// Import component
 import Loading from 'vue3-loading-overlay'
-// Import stylesheet
+// Import vue3-loading-overlay stylesheet
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
 import App from './App.vue'
 import router from './router'
