@@ -11,10 +11,7 @@
             <router-link to="/" class="nav-link active">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/about" class="nav-link">About</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/vueInfo" class="nav-link">VueInfo</router-link>
+            <router-link to="/userDashboard/userCart" class="nav-link">產品列表</router-link>
           </li>
         </ul>
         <form class="d-flex" role="search">

@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Dashboard</a>
+      <a class="navbar-brand" href="#">Navbar</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -11,13 +11,17 @@
             <router-link to="/" class="nav-link active">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/about" class="nav-link">About</router-link>
+            <router-link to="/dashboardView/products" class="nav-link">產品列表</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/vueInfo" class="nav-link">VueInfo</router-link>
+            <router-link to="/dashboardView/orders" class="nav-link">訂單列表</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/dashboardView/cupon" class="nav-link">優惠卷</router-link>
           </li>
         </ul>
         <form class="d-flex" role="search">
+          <router-link to="/loginView" class="btn btn-outline-success me-2">登入</router-link>
           <button class="btn btn-outline-success" type="button" @click.prevent="logout">登出</button>
         </form>
       </div>

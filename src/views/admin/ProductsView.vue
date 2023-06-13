@@ -20,10 +20,10 @@
             <td>{{ item.category }}</td>
             <td>{{ item.title }}</td>
             <td class="text-right">
-                {{ item.origin_price }}
+                {{ $filters.currency(item.origin_price) }}
             </td>
             <td class="text-right">
-                {{ item.price }}
+                {{ $filters.currency(item.price) }}
             </td>
             <td>
                 <span class="text-success" :class="{ 'text-muted': item.is_enabled === undefined | 0  }">{{ item.is_enabled === 1 ? '啟用' : '未啟用 '}}</span>
@@ -37,7 +37,7 @@
             </tr>
         </tbody>
     </table>
-    <PaginationBar></PaginationBar>
+    <PaginationBar :pagination-bar="pagination" @emit-page="getProductList" @emit-prevpage="getProductList" @emit-nextpage="getProductList"></PaginationBar>
     <ProductModal ref="productModal" :product="addProductList" @add-product="updateProduct"></ProductModal>
     <DeleteModal ref="deleteModal" :delete-item="addProductList" @delete-product="deleteProduct"></DeleteModal>
 </template>
@@ -64,8 +64,8 @@ export default {
   },
   inject: ['emitter'],
   methods: {
-    getProductList () {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products`
+    getProductList (page) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
       this.isLoading = true
       this.$http.get(api)
         .then((res) => {
