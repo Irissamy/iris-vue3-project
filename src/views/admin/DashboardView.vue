@@ -1,4 +1,5 @@
 <template>
+  <NavBarDashboard></NavBarDashboard>
   <div class="container-fluid mt-3 position-relative">
     <ToastMessages></ToastMessages>
     <router-view/>
@@ -7,10 +8,12 @@
 
 <script>
 import emitter from '@/methods/emitter'
+import NavBarDashboard from '@/components/NavBarDashboard.vue'
 import ToastMessages from '@/components/ToastMessages.vue'
 
 export default {
   components: {
+    NavBarDashboard,
     ToastMessages
   },
   provide () {

@@ -28,12 +28,39 @@ const routes = [
   {
     path: '/dashboardView',
     name: 'dashboardView',
-    component: () => import('../views/DashboardView.vue'),
+    component: () => import('../views/admin/DashboardView.vue'),
     children: [
       {
         path: 'products',
         name: 'products',
-        component: () => import('../views/ProductsView.vue')
+        component: () => import('../views/admin/ProductsView.vue')
+      },
+      {
+        path: 'orders',
+        name: 'orders',
+        component: () => import('../views/admin/OrdersView.vue')
+      },
+      {
+        path: 'cupon',
+        name: 'cupon',
+        component: () => import('../views/admin/CuponView.vue')
+      }
+    ]
+  },
+  {
+    path: '/userDashboard',
+    name: 'userDashboard',
+    component: () => import('../views/UserDashboard.vue'),
+    children: [
+      {
+        path: 'userCart',
+        name: 'userCart',
+        component: () => import('../views/user/UserCart.vue')
+      },
+      {
+        path: 'userProduct/:productId',
+        name: 'userProduct',
+        component: () => import('../views/user/UserProduct.vue')
       }
     ]
   }
