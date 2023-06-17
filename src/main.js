@@ -8,11 +8,12 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { currency } from './methods/filter'
+import { currency, date } from './methods/filter'
 
 const app = createApp(App)
 app.config.globalProperties.$filters = {
-  currency
+  currency,
+  date
 }
 app.use(VueAxios, axios)
 app.use(store)

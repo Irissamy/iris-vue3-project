@@ -26,7 +26,8 @@
                 {{ $filters.currency(item.price) }}
             </td>
             <td>
-                <span class="text-success" :class="{ 'text-muted': item.is_enabled === undefined | 0  }">{{ item.is_enabled === 1 ? '啟用' : '未啟用 '}}</span>
+                <span class="text-success" v-if="item.is_enabled === 1">啟用</span>
+                <span class="text-muted" v-else>未啟用</span>
             </td>
             <td>
                 <div class="btn-group">
@@ -64,7 +65,7 @@ export default {
   },
   inject: ['emitter'],
   methods: {
-    getProductList (page) {
+    getProductList (page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products/?page=${page}`
       this.isLoading = true
       this.$http.get(api)
@@ -118,7 +119,7 @@ export default {
           this.$refs.productModal.hideModal()
         })
     },
-    deleteProduct (item) {
+    deleteProduct () {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${this.addProductList.id}`
       this.$http.delete(api)
         .then((res) => {

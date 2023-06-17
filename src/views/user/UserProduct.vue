@@ -19,7 +19,7 @@
         <del class="h6" v-if="productDetail.price">原價 {{ productDetail.origin_price }} 元</del>
         <div class="h5" v-if="productDetail.price">現在只要 {{ productDetail.price }} 元</div>
         <hr>
-        <button type="button" class="btn btn-outline-danger">
+        <button type="button" class="btn btn-outline-danger" @emit-addcart="addToCart">
           加到購物車
         </button>
       </div>
@@ -50,6 +50,9 @@ export default {
             console.log(res.data.message)
           }
         })
+    },
+    addToCart () {
+      this.$emit('emit-addcart', this.productDetail.id)
     }
   },
   created () {
