@@ -78,7 +78,7 @@
                 </td>
                 <td class="text-end">
                   <small v-if="item.final_total !== item.total" class="text-success">折扣價：</small>
-                  {{ item.final_total }}
+                  {{ $filters.currency(item.final_total) }}
                 </td>
               </tr>
             </template>
@@ -86,24 +86,64 @@
             <tfoot>
             <tr>
               <td colspan="3" class="text-end">總計</td>
-              <td class="text-end">{{ cartList.total }}</td>
+              <td class="text-end">{{ $filters.currency(cartList.total) }}</td>
             </tr>
             <tr v-if="cartList.final_total !== cartList.total">
               <td colspan="3" class="text-end text-success">折扣價</td>
-              <td class="text-end text-success">{{ cartList.final_total }}</td>
+              <td class="text-end text-success">{{ $filters.currency(cartList.final_total) }}</td>
             </tr>
             </tfoot>
           </table>
           <div class="input-group mb-3 input-group-sm">
-            <input type="text" class="form-control" placeholder="請輸入優惠碼">
+            <input type="text" class="form-control" placeholder="請輸入優惠碼" v-model="cuponCode">
             <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button">
+              <button class="btn btn-outline-secondary" type="button" @click="useCupon">
                 套用優惠碼
               </button>
             </div>
           </div>
         </div>
       </div>
+    </div>
+    <!-- 送出訂單表單 -->
+    <div class="my-5 row justify-content-center">
+      <Form class="col-md-6">
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input id="email" name="email" type="email" class="form-control"
+                   placeholder="請輸入 Email">
+          <span name="email" class="invalid-feedback"></span>
+        </div>
+
+        <div class="mb-3">
+          <label for="name" class="form-label">收件人姓名</label>
+          <input id="name" name="姓名" type="text" class="form-control"
+                   placeholder="請輸入姓名">
+          <span name="姓名" class="invalid-feedback"></span>
+        </div>
+
+        <div class="mb-3">
+          <label for="tel" class="form-label">收件人電話</label>
+          <input id="tel" name="電話" type="tel" class="form-control"
+                   placeholder="請輸入電話">
+          <span name="電話" class="invalid-feedback"></span>
+        </div>
+
+        <div class="mb-3">
+          <label for="address" class="form-label">收件人地址</label>
+          <input id="address" name="地址" type="text" class="form-control"
+                   placeholder="請輸入地址">
+          <span name="地址" class="invalid-feedback"></span>
+        </div>
+
+        <div class="mb-3">
+          <label for="message" class="form-label">留言</label>
+          <textarea name="" id="message" class="form-control" cols="30" rows="10"></textarea>
+        </div>
+        <div class="text-end">
+          <button class="btn btn-danger">送出訂單</button>
+        </div>
+      </Form>
     </div>
   </div>
 </template>
@@ -119,7 +159,8 @@ export default {
         // 對應品項 id
         loadingItem: ''
       },
-      cartList: {}
+      cartList: {},
+      cuponCode: ''
     }
   },
   methods: {
@@ -182,6 +223,15 @@ export default {
         .then((res) => {
           this.getCartList()
           this.status.loadingItem = ''
+        })
+    },
+    useCupon () {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`
+      this.$http.post(api, { data: { code: this.cuponCode } })
+        .then((res) => {
+          // this.cartList.carts.cupon = res.data.success
+          // this.cartList.final_total = res.data.final_total
+          this.getCartList()
         })
     }
   },
