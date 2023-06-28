@@ -28,10 +28,11 @@
             <div class="mb-3">
                 <div class="form-check">
                 <input class="form-check-input" type="checkbox"
+                    id="is_enabled"
+                    v-model="cuponData.is_enabled"
                     :true-value="1"
                     :false-value="0"
-                    id="is_enabled"
-                    v-model="cuponData.is_enabled">
+                    >
                 <label class="form-check-label" for="is_enabled">
                     是否啟用
                 </label>

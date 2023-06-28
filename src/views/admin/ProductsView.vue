@@ -77,7 +77,9 @@ export default {
     },
     openModal (isNew, item) {
       if (isNew) {
-        this.addProductList = {}
+        this.addProductList = {
+          is_enabled: 0 // 瀏覽器預設checkbox value，所以這邊先預設value避免空值
+        }
       } else {
         this.addProductList = { ...item } // 展開物件
       }

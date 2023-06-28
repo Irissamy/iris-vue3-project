@@ -18,7 +18,7 @@
           <td>
             <ul class="list-unstyled">
               <li>
-                 數量：
+                數量：
               </li>
             </ul>
           </td>
@@ -61,7 +61,7 @@ export default {
           if (res.success) {
             this.orderList = res.orders
           } else {
-            console.log(res.messages)
+            console.log(this.orderList)
           }
         })
     }
