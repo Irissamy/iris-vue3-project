@@ -70,6 +70,7 @@ export default {
       this.isNew = isNew
       if (this.isNew) {
         this.tempCupon = {
+          is_enabled: 0, // 瀏覽器預設checkbox value，所以這邊先預設value避免空值
           due_date: new Date().getTime() / 1000
         }
       } else {
