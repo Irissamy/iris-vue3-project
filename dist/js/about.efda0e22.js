@@ -1,2 +1,2 @@
 "use strict";(self["webpackChunkiris_vue3_project"]=self["webpackChunkiris_vue3_project"]||[]).push([[443],{833:function(e,n,r){r.r(n),r.d(n,{default:function(){return l}});var u=r(3396);const t={class:"about"},s=(0,u._)("h1",null,"This is an about page",-1),i=[s];function a(e,n){return(0,u.wg)(),(0,u.iD)("div",t,i)}var c=r(89);const o={},f=(0,c.Z)(o,[["render",a]]);var l=f}}]);
-//# sourceMappingURL=about.560a7879.js.map
+//# sourceMappingURL=about.efda0e22.js.map
