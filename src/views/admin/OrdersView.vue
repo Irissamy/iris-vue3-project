@@ -11,35 +11,34 @@
     </tr>
     </thead>
     <tbody>
-      <template>
-        <tr>
-          <td></td>
-          <td><span></span></td>
-          <td>
-            <ul class="list-unstyled">
-              <li>
-                數量：
-              </li>
-            </ul>
-          </td>
-          <td class="text-right"></td>
-          <td>
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox">
-              <label class="form-check-label">
-                <span>已付款</span>
-                <span>未付款</span>
-              </label>
-            </div>
-          </td>
-          <td>
-            <div class="btn-group">
-              <button class="btn btn-outline-primary btn-sm">檢視</button>
-              <button class="btn btn-outline-danger btn-sm">刪除</button>
-            </div>
-          </td>
-        </tr>
-      </template>
+      <tr v-for="item in orderList" :key="item.id">
+        <td>{{ item.create_at }}</td>
+        <td>{{ item.user.email }}</td>
+        <td>
+          <ul class="list-unstyled">
+            <li v-for="el in item.products" :key="el.id">
+              {{ el.product.title }}
+             / 數量：{{ el.product.num }}
+            </li>
+          </ul>
+        </td>
+        <td class="text-right">{{ item.total }}</td>
+        <td>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" v-model="item.is_paid">
+            <label class="form-check-label">
+              <span v-if="item.is_paid">已付款</span>
+              <span v-else>未付款</span>
+            </label>
+          </div>
+        </td>
+        <td>
+          <div class="btn-group">
+            <button class="btn btn-outline-primary btn-sm">檢視</button>
+            <button class="btn btn-outline-danger btn-sm">刪除</button>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
 </template>
@@ -58,10 +57,10 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders/?page=${page}`
       this.$http.get(api)
         .then((res) => {
-          if (res.success) {
-            this.orderList = res.orders
+          if (res.data.success) {
+            this.orderList = res.data.orders
           } else {
-            console.log(this.orderList)
+            console.log(res.data.messages)
           }
         })
     }
