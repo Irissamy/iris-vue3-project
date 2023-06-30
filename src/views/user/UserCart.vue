@@ -255,7 +255,11 @@ export default {
       const order = this.form
       this.$http.post(api, { data: order })
         .then((res) => {
-          console.log(res)
+          if (res.data.success) {
+            this.$router.push(`/userDashboard/checkout/${res.data.orderId}`)
+          } else {
+            console.log(res)
+          }
         })
     }
   },
